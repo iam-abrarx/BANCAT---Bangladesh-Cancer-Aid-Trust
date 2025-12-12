@@ -1,0 +1,69 @@
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: bancat-app
+    container_name: bancat-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./backend:/var/www
+    environment:
+      - APP_ENV=local
+      - APP_KEY=${APP_KEY}
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - db
+      - redis
+    networks:
+      - bancat-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: bancat-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/public:/var/www/public
+      - ./frontend/dist:/var/www/frontend/dist
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - bancat-network
+
+  db:
+    image: postgres:15
+    container_name: bancat-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - bancat-network
+
+  redis:
+    image: redis:alpine
+    container_name: bancat-redis
+    restart: unless-stopped
+    networks:
+      - bancat-network
+
+networks:
+  bancat-network:
+    driver: bridge
+
+volumes:
+  db-data:

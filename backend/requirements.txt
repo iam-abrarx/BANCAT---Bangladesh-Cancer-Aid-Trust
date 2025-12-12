@@ -1,0 +1,99 @@
+# BANcat Backend - Laravel/PHP Requirements
+# This file lists PHP Composer dependencies and system requirements
+
+# ===================================
+# SYSTEM REQUIREMENTS
+# ===================================
+# PHP >= 8.2
+# PostgreSQL >= 15.0
+# Redis >= 7.0
+# Composer >= 2.5
+
+# ===================================
+# CORE LARAVEL FRAMEWORK
+# ===================================
+# laravel/framework: ^10.0
+# laravel/sanctum: ^3.3          # SPA authentication
+# laravel/tinker: ^2.8           # Interactive REPL
+
+# ===================================
+# DATABASE & ORM
+# ===================================
+# doctrine/dbal: ^3.7            # Database abstraction layer
+# laravel/telescope: ^4.17       # Development debugging (dev only)
+
+# ===================================
+# PAYMENT GATEWAYS
+# ===================================
+# stripe/stripe-php: ^13.0       # Stripe payment processing
+# paypal/rest-api-sdk-php: ^1.14 # PayPal integration
+# (Note: bKash, Nagad, Rocket require custom implementations)
+
+# ===================================
+# CACHE & QUEUE
+# ===================================
+# predis/predis: ^2.2            # Redis client for PHP
+
+# ===================================
+# FILE STORAGE
+# ===================================
+# league/flysystem-aws-s3-v3: ^3.0  # S3-compatible storage (optional)
+
+# ===================================
+# API & DOCUMENTATION
+# ===================================
+# knuckleswtf/scribe: ^4.0       # API documentation generator
+# spatie/laravel-cors: ^2.3      # CORS handling (if not using built-in)
+
+# ===================================
+# EMAIL
+# ===================================
+# (Built-in Laravel Mail - no additional package needed)
+# symfony/mailgun-mailer: ^6.3   # Mailgun driver (optional)
+# symfony/postmark-mailer: ^6.3  # Postmark driver (optional)
+
+# ===================================
+# UTILITIES
+# ===================================
+# spatie/laravel-permission: ^6.0   # Role & Permission management
+# spatie/laravel-sluggable: ^3.6    # Auto-generate slugs
+# intervention/image: ^2.7          # Image manipulation
+# barryvdh/laravel-debugbar: ^3.9   # Debug toolbar (dev only)
+
+# ===================================
+# TESTING
+# ===================================
+# phpunit/phpunit: ^10.0         # Unit testing framework
+# fakerphp/faker: ^1.23          # Fake data generation
+# mockery/mockery: ^1.6          # Mocking framework
+
+# ===================================
+# CODE QUALITY
+# ===================================
+# laravel/pint: ^1.13            # Code style fixer (dev only)
+# nunomaduro/larastan: ^2.6      # Static analysis (dev only)
+
+# ===================================
+# MONITORING & LOGGING
+# ===================================
+# sentry/sentry-laravel: ^4.0    # Error tracking
+
+# ===================================
+# INSTALLATION NOTES
+# ===================================
+# To install all dependencies, run:
+# composer install
+#
+# For production deployment, use:
+# composer install --no-dev --optimize-autoloader
+#
+# Update dependencies:
+# composer update
+
+# ===================================
+# CUSTOM PAYMENT GATEWAY PACKAGES
+# ===================================
+# For bKash, Nagad, Rocket: Custom packages or implementations required
+# These may need to be developed or integrated from third-party libraries
+
+# Last updated: 2025-12-06

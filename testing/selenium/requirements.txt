@@ -1,0 +1,76 @@
+# BANcat Selenium E2E Testing Requirements
+# Python dependencies for automated browser testing
+
+# ===================================
+# CORE SELENIUM
+# ===================================
+selenium==4.16.0              # WebDriver for browser automation
+webdriver-manager==4.0.1      # Auto-manage browser drivers
+
+# ===================================
+# TESTING FRAMEWORKS
+# ===================================
+pytest==7.4.3                 # Testing framework
+pytest-html==4.1.1            # HTML test reports
+pytest-xdist==3.5.0           # Parallel test execution
+pytest-timeout==2.2.0         # Test timeout handling
+
+# ===================================
+# PAGE OBJECT MODEL
+# ===================================
+selenium-page-factory  # Page Object Pattern support
+
+# ===================================
+# ASSERTIONS & UTILITIES
+# ===================================
+assertpy==1.1                 # Fluent assertions
+Faker==22.0.0                 # Generate fake test data
+
+# ===================================
+# SCREENSHOTS & REPORTING
+# ===================================
+Pillow==10.1.0                # Image manipulation for screenshots
+allure-pytest==2.13.2         # Allure test reporting
+
+# ===================================
+# WAITING & TIMING
+# ===================================
+# selenium-expected-conditions==1.0.0  # Custom wait conditions (Using standard)
+
+# ===================================
+# DATA HANDLING
+# ===================================
+python-dotenv==1.0.0          # Environment variable management
+pyyaml==6.0.1                 # YAML config files
+openpyxl==3.1.2               # Excel test data (optional)
+
+# ===================================
+# API TESTING (For Setup/Teardown)
+# ===================================
+requests==2.31.0              # HTTP requests for API calls
+
+# ===================================
+# LOGGING
+# ===================================
+colorlog==6.8.0               # Colored console logging
+
+# ===================================
+# CODE QUALITY
+# ===================================
+black==23.12.1                # Code formatter
+flake8==7.0.0                 # Linting
+pylint==3.0.3                 # Static analysis
+
+# ===================================
+# INSTALLATION
+# ===================================
+# Install all dependencies:
+#   pip install -r requirements.txt
+#
+# For development with code quality tools:
+#   pip install -r requirements.txt
+#
+# Run tests:
+#   pytest tests/ -v --html=reports/report.html
+
+# Last updated: 2025-12-06

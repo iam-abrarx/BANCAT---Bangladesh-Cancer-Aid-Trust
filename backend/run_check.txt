@@ -1,0 +1,6 @@
+config(['database.default' => 'mysql']);
+config(['database.connections.mysql.database' => 'bancat']);
+config(['database.connections.mysql.username' => 'root']);
+config(['database.connections.mysql.password' => '']);
+try { echo "MyCount: " . DB::table('users')->count(); } catch (\Exception $e) { echo "MyError: " . $e->getMessage(); }
+exit
