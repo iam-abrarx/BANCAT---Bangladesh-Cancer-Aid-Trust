@@ -397,7 +397,17 @@ export const ZakatCalculator = () => {
                                     <Typography variant="body2" color="text.secondary" fontWeight={500} gutterBottom>
                                         ESTIMATED ZAKAT PAYABLE
                                     </Typography>
-                                    <Typography variant="h3" fontWeight={700} color={calculations.nisabMet ? 'primary.main' : 'text.disabled'} sx={{ letterSpacing: '-1px' }}>
+                                    <Typography
+                                        variant="h3"
+                                        fontWeight={700}
+                                        color={calculations.nisabMet ? 'primary.main' : 'text.disabled'}
+                                        sx={{
+                                            letterSpacing: '-1px',
+                                            fontSize: { xs: '2rem', sm: '2.2rem', md: '2.5rem' },
+                                            wordBreak: 'break-word',
+                                            lineHeight: 1.2
+                                        }}
+                                    >
                                         {formatCurrency(calculations.zakatAmount)}
                                     </Typography>
                                 </Box>

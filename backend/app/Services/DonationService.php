@@ -7,24 +7,27 @@ use App\Models\Patient;
 use App\Models\Campaign;
 use App\Services\Payment\PaymentGatewayInterface;
 use App\Services\Payment\BkashGateway; // Direct binding for now, better in ServiceProvider
+use App\Services\Payment\PaymentGatewayFactory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class DonationService
 {
-    protected $gateway;
+    // protected $gateway; // Removed hard dependency
 
     public function __construct()
     {
-        // Simple factory logic for now
-        $this->gateway = new BkashGateway();
+        // No default gateway
     }
 
     public function initiateDonation(array $data)
     {
         return DB::transaction(function () use ($data) {
             $transactionId = 'TRX-' . strtoupper(Str::random(10));
+
+            // Factory: Select Gateway based on user input
+            $gateway = PaymentGatewayFactory::make($data['payment_method'] ?? 'bkash');
 
             $donation = Donation::create([
                 'transaction_id' => $transactionId,
@@ -45,7 +48,7 @@ class DonationService
             ]);
 
             // Call Gateway
-            $paymentResponse = $this->gateway->initiatePayment([
+            $paymentResponse = $gateway->initiatePayment([
                 'amount' => $data['amount'],
                 'transaction_id' => $transactionId,
                 'redirect_url' => route('api.donations.callback'),
@@ -69,7 +72,8 @@ class DonationService
         }
 
         // Verify with Gateway
-        $verification = $this->gateway->verifyPayment($transactionId);
+        $gateway = PaymentGatewayFactory::make($donation->payment_method ?? 'bkash');
+        $verification = $gateway->verifyPayment($transactionId);
 
         if ($verification['status'] === 'completed') {
             DB::transaction(function () use ($donation, $verification) {
@@ -79,7 +83,7 @@ class DonationService
                     'payment_status' => 'completed',
                     // 'status' => 'pending' // Default is pending
                 ]);
-                
+
                 Log::info("Donation {$donation->id} Payment Verified. Waiting for Admin Approval.");
             });
         }
@@ -120,9 +124,9 @@ class DonationService
                     // Or recalculate if consistent with Patient logic
                 }
             } elseif ($donation->program_id) {
-                 // Logic for Program milestones if they exist
-                 // $program = Program::lockForUpdate()->find($donation->program_id);
-                 // $program->increment('raised_amount', $donation->amount);
+                // Logic for Program milestones if they exist
+                // $program = Program::lockForUpdate()->find($donation->program_id);
+                // $program->increment('raised_amount', $donation->amount);
             }
         });
 
