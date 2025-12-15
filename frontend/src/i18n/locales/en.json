@@ -1,0 +1,17 @@
+{
+    "hero": {
+        "headline": "Fighting Cancer Together",
+        "subtext": "Join BANcat in our mission to support cancer patients with hope, care, and financial aid."
+    },
+    "nav": {
+        "home": "Home",
+        "about": "About Us",
+        "programs": "Our Work",
+        "stories": "Stories",
+        "donate": "Donate"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong"
+    }
+}
